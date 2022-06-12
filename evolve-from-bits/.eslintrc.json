@@ -1,5 +1,6 @@
 {
   "root": true,
+  "ignorePatterns": ["lib.js", "lib.d.ts"],
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "@typescript-eslint"

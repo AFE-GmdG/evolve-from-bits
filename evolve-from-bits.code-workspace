@@ -38,7 +38,17 @@
         "args": [
           "--mode=development",
         ],
-        "protocol": "inspector",
+        "console": "integratedTerminal",
+        "outputCapture": "std",
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Run WASM Build",
+        "program": "${workspaceFolder:Evolve Library}\\build.js",
+        "args": [
+        ],
+        "cwd": "${workspaceFolder:Evolve Library}",
         "console": "integratedTerminal",
         "outputCapture": "std",
       },
@@ -92,10 +102,25 @@
         "isBackground": true,
         "promptOnClose": false,
       },
+      // {
+      //   "label": "build-library",
+      //   "type": "process",
+      //   "command": "cl.exe",
+      // },
     ],
   },
 
   "settings": {
+    // "cmake.sourceDirectory": "${workspaceFolder:Evolve Library}",
+    // "cmake.buildDirectory": "${workspaceFolder:Evolve Library}/out/build",
+    // "cmake.buildBeforeRun": true,
+    // "cmake.buildTask": true,
+    // "cmake.emscriptenSearchDirs": [
+    //   // "S:\\Work\\emsdk\\upstream\\emscripten"
+    // ],
+    // "cmake.mingwSearchDirs": [],
+    // "cmake.platform": "x64",
+
     "editor.scrollBeyondLastLine": true,
     "editor.minimap.enabled": true,
     "editor.wordWrap": "off",
@@ -117,14 +142,13 @@
     "files.insertFinalNewline": true,
 
     "files.exclude": {
-      "**/.vscode": true,
+      "**/.vscode": false,
       "**/node_modules": true,
-      "**/dist": true,
+      "**/dist": false,
       "**/bin": true,
       "**/build": true,
       "**/obj": true,
       ".git": true,
-      "*.code-workspace": true,
       "**/.gitignore": true,
       "**/.eslintignore": true,
       "**/*lock.json": true,

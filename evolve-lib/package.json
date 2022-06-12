@@ -1,0 +1,11 @@
+{
+  "name": "evolve-lib",
+  "version": "0.0.1",
+  "description": "library for evolve-from-bits",
+  "main": "dist/lib.js",
+  "type": "module",
+  "repository": {
+    "type": "none"
+  },
+  "license": "MIT"
+}

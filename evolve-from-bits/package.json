@@ -8,14 +8,27 @@
     "prebuild": "rimraf dist",
     "build": "webpack --mode=production",
     "prebuilddev": "rimraf dist",
-    "builddev": "webpack --mode=development"
+    "builddev": "webpack --mode=development",
+    "buildWasm": "cd ../evolve-lib && node build.js"
   },
   "repository": {
     "type": "none"
   },
   "license": "MIT",
+  "dependencies": {
+    "@material-ui/core": "4.12.4",
+    "@material-ui/icons": "4.11.3",
+    "@material-ui/styles": "4.11.5",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-router": "5.2.1",
+    "react-router-dom": "5.2.1"
+  },
   "devDependencies": {
-    "@types/emscripten": "1.39.6",
+    "@types/react": "17.0.45",
+    "@types/react-dom": "17.0.17",
+    "@types/react-router": "5.1.18",
+    "@types/react-router-dom": "5.3.3",
     "@typescript-eslint/eslint-plugin": "4.22.0",
     "@typescript-eslint/parser": "4.22.0",
     "copy-webpack-plugin": "11.0.0",
@@ -32,6 +45,5 @@
     "webpack": "5.72.1",
     "webpack-cli": "4.9.2",
     "webpack-dev-server": "4.9.1"
-  },
-  "dependencies": {}
+  }
 }

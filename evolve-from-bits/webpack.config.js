@@ -21,11 +21,15 @@ const config = {
   context: path.resolve(cwd, "src"),
 
   entry: {
-    app: ["./app.ts"],
+    app: ["./app.tsx"],
   },
 
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
+    fallback: {
+      fs: false,
+      path: false,
+    },
   },
 
   output: {
@@ -139,7 +143,9 @@ module.exports = (_env, argv) => {
         },
         historyApiFallback: true,
         host: "0.0.0.0",
-        hot: "only",
+        hot: false,
+        // liveReload: true,
+        // watchFiles: [path.resolve(cwd, "src")],
         port: 5000,
         static: {
           directory: path.resolve(cwd, "dist"),
