@@ -142,9 +142,9 @@
     "files.insertFinalNewline": true,
 
     "files.exclude": {
-      "**/.vscode": false,
+      "**/.vscode": true,
       "**/node_modules": true,
-      "**/dist": false,
+      "**/dist": true,
       "**/bin": true,
       "**/build": true,
       "**/obj": true,

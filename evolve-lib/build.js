@@ -105,10 +105,11 @@ const runEmcc = async (sourceFileNames) => {
 
   const args = [
     ...(useDebugBuild ? debugArgs : releaseArgs),
+    "-sENVIRONMENT=web",
     "-sWASM",
     "-sMODULARIZE",
     "-sEXPORT_ES6",
-    "-sDYNAMIC_EXECUTION=0",
+    "-sNO_DYNAMIC_EXECUTION",
     `-sEXPORTED_FUNCTIONS=${Object.keys(exportedFunctions).map((key) => `_${key}`).join(",")}`,
     "-sEXPORTED_RUNTIME_METHODS=cwrap",
     "--no-entry",

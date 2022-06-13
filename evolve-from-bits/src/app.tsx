@@ -4,8 +4,12 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { createStyles, makeStyles, Theme, ThemeProvider } from "@material-ui/core/styles";
 
+import PageFooter from "./components/pageFooter";
+
 import { EvolveLibContextProvider } from "./context/evolveLibContext";
-import { Slash } from "./views/slash";
+
+import Pond from "./views/pond";
+import Slash from "./views/slash";
 
 import muiTheme from "./theme";
 
@@ -31,20 +35,38 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       flex: "1 0 0px",
     },
   },
+  content: {
+    position: "relative",
+    flex: "1 0 0px",
+    backgroundColor: theme.palette.background.default,
+    overflow: "hidden",
+    padding: theme.spacing(1),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "stretch",
+    justifyContent: "space-between",
+    gap: theme.spacing(1),
+  },
 }));
 
 const App: React.FC = () => {
-  useStyles();
+  const classes = useStyles();
 
   return (
     <ThemeProvider theme={muiTheme}>
       <EvolveLibContextProvider>
         <BrowserRouter>
-          <Switch>
-            <Route path="/">
-              <Slash />
-            </Route>
-          </Switch>
+          <div className={classes.content}>
+            <Switch>
+              <Route path="/pond">
+                <Pond />
+              </Route>
+              <Route path="/">
+                <Slash />
+              </Route>
+            </Switch>
+          </div>
+          <PageFooter />
         </BrowserRouter>
       </EvolveLibContextProvider>
     </ThemeProvider>
