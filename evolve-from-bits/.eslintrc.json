@@ -24,8 +24,8 @@
     "import/no-cycle": "off",
     "import/prefer-default-export": "off",
     "lines-between-class-members": "off",
+    "@typescript-eslint/lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
     "no-nested-ternary": "off",
-    "@typescript-eslint/lines-between-class-members": ["error", "always", { "exceptAfterOverload": true }],
     "object-curly-newline": "off", //["error", { "multiline": true, "minProperties": 8, "consistent": true }],
     "quotes": ["error", "double"],
     "@typescript-eslint/quotes": ["error", "double"],
@@ -34,6 +34,7 @@
     "no-underscore-dangle": ["error", { "allowAfterThis": true }],
     "no-param-reassign": ["error", { "props": false }],
     "react/prop-types": ["error", { "skipUndeclared": true }],
-    "@typescript-eslint/naming-convention": ["error", {"format": ["camelCase", "PascalCase", "UPPER_CASE"], "leadingUnderscore": "allow", "selector": "default"}]
+    "@typescript-eslint/naming-convention": ["error", {"format": ["camelCase", "PascalCase", "UPPER_CASE"], "leadingUnderscore": "allow", "selector": "default"}],
+    "class-methods-use-this": "off"
   }
 }

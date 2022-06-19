@@ -1,0 +1,1 @@
+- [Emscripten Bindings](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html)

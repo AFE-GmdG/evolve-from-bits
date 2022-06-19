@@ -1,1 +1,20 @@
 emcc -O3 -g0 -flto --closure 1 -sMODULARIZE -sEXPORT_ES6 --no-entry -o ./lib.js ./src/fib.c
+
+emcc -O3 -g0 -flto --closure 1 -sENVIRONMENT=web -sWASM -sMODULARIZE -sEXPORT_ES6 -sNO_DYNAMIC_EXECUTION -sEXPORTED_RUNTIME_METHODS=cwrap --no-entry --bind -o e:/lib.js ./src/food.cpp
+
+
+
+"-O3",
+"-g0",
+"-flto",
+"--closure",
+"1",
+
+
+"-sENVIRONMENT=web",
+"-sWASM",
+"-sMODULARIZE",
+"-sEXPORT_ES6",
+"-sNO_DYNAMIC_EXECUTION",
+"-sEXPORTED_RUNTIME_METHODS=cwrap",
+"--no-entry"

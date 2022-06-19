@@ -4,14 +4,14 @@
       "name": "Evolve From Bits",
       "path": "./evolve-from-bits",
     },
-    {
-      "name": "Evolve Library",
-      "path": "./evolve-lib",
-    },
-    {
-      "name": "Loaders",
-      "path": "./loaders",
-    }
+    // {
+    //   "name": "Evolve Library",
+    //   "path": "./evolve-lib",
+    // },
+    // {
+    //   "name": "Loaders",
+    //   "path": "./loaders",
+    // },
   ],
 
   "launch": {
@@ -30,28 +30,28 @@
           "webpack:///*": "*",
         },
       },
-      {
-        "type": "node",
-        "request": "launch",
-        "name": "Debug Webpack",
-        "program": "${workspaceFolder:Evolve From Bits}\\node_modules\\webpack\\bin\\webpack.js",
-        "args": [
-          "--mode=development",
-        ],
-        "console": "integratedTerminal",
-        "outputCapture": "std",
-      },
-      {
-        "type": "node",
-        "request": "launch",
-        "name": "Run WASM Build",
-        "program": "${workspaceFolder:Evolve Library}\\build.js",
-        "args": [
-        ],
-        "cwd": "${workspaceFolder:Evolve Library}",
-        "console": "integratedTerminal",
-        "outputCapture": "std",
-      },
+      // {
+      //   "type": "node",
+      //   "request": "launch",
+      //   "name": "Debug Webpack",
+      //   "program": "${workspaceFolder:Evolve From Bits}\\node_modules\\webpack\\bin\\webpack.js",
+      //   "args": [
+      //     "--mode=development",
+      //   ],
+      //   "console": "integratedTerminal",
+      //   "outputCapture": "std",
+      // },
+      // {
+      //   "type": "node",
+      //   "request": "launch",
+      //   "name": "Run WASM Build",
+      //   "program": "${workspaceFolder:Evolve Library}\\build.js",
+      //   "args": [
+      //   ],
+      //   "cwd": "${workspaceFolder:Evolve Library}",
+      //   "console": "integratedTerminal",
+      //   "outputCapture": "std",
+      // },
     ],
   },
 
@@ -102,25 +102,10 @@
         "isBackground": true,
         "promptOnClose": false,
       },
-      // {
-      //   "label": "build-library",
-      //   "type": "process",
-      //   "command": "cl.exe",
-      // },
     ],
   },
 
   "settings": {
-    // "cmake.sourceDirectory": "${workspaceFolder:Evolve Library}",
-    // "cmake.buildDirectory": "${workspaceFolder:Evolve Library}/out/build",
-    // "cmake.buildBeforeRun": true,
-    // "cmake.buildTask": true,
-    // "cmake.emscriptenSearchDirs": [
-    //   // "S:\\Work\\emsdk\\upstream\\emscripten"
-    // ],
-    // "cmake.mingwSearchDirs": [],
-    // "cmake.platform": "x64",
-
     "editor.scrollBeyondLastLine": true,
     "editor.minimap.enabled": true,
     "editor.wordWrap": "off",
@@ -151,6 +136,7 @@
       ".git": true,
       "**/.gitignore": true,
       "**/.eslintignore": true,
+      "**/.eslintrc.json": true,
       "**/*lock.json": true,
       "**/*.lock": true,
       "**/*.log": true,
@@ -182,9 +168,5 @@
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
     "javascript.format.placeOpenBraceOnNewLineForFunctions": false,
     "javascript.format.placeOpenBraceOnNewLineForControlBlocks": false,
-
-    "omnisharp.enableEditorConfigSupport": true,
-    "omnisharp.enableImportCompletion": true,
-    "omnisharp.useEditorFormattingSettings": false,
   },
 }

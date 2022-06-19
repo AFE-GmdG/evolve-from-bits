@@ -2,6 +2,14 @@ import React from "react";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
+import Creature, { CreatureProps } from "../components/creature";
+
+import { isMouseEvent } from "../types/events";
+
+type CreaturePropsWithId = CreatureProps & {
+  id: number;
+};
+
 const useStyles = makeStyles((theme: Theme) => createStyles({
   container: {
     position: "relative",
@@ -55,14 +63,61 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-const isMouseEvent = (
-  event: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>,
-): event is React.MouseEvent<HTMLDivElement> => "type" in event;
-
 const Pond: React.FC = () => {
   const classes = useStyles();
 
   const [collapsed, setCollapsed] = React.useState(false);
+
+  const creatures = React.useMemo<CreaturePropsWithId[]>(
+    () => {
+      const cp: CreaturePropsWithId[] = [
+        {
+          id: 0,
+          creature: {
+            location: {
+              x: Math.random() * 800 + 100,
+              y: Math.random() * 800 + 100,
+            },
+            orientation: Math.random() * 360,
+            bodyLength: Math.random() * 15 + 5,
+          },
+        }, {
+          id: 1,
+          creature: {
+            location: {
+              x: Math.random() * 800 + 100,
+              y: Math.random() * 800 + 100,
+            },
+            orientation: Math.random() * 360,
+            bodyLength: Math.random() * 15 + 5,
+          },
+        }, {
+          id: 2,
+          creature: {
+            location: {
+              x: Math.random() * 800 + 100,
+              y: Math.random() * 800 + 100,
+            },
+            orientation: Math.random() * 360,
+            bodyLength: Math.random() * 15 + 5,
+          },
+        }, {
+          id: 3,
+          creature: {
+            location: {
+              x: Math.random() * 800 + 100,
+              y: Math.random() * 800 + 100,
+            },
+            orientation: Math.random() * 360,
+            bodyLength: Math.random() * 15 + 5,
+          },
+        },
+      ];
+
+      return cp;
+    },
+    [],
+  );
 
   const handleCollapseExpand = (event: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>) => {
     if (isMouseEvent(event)) {
@@ -83,15 +138,20 @@ const Pond: React.FC = () => {
           className={classes.svg}
           width={1000} // 1239
           height={1000} // 921
+          viewBox="0 0 1000 1000"
         >
-          <line className={classes.blackStroke} x1={100} y1={100} x2={200} y2={200} />
+          {
+            creatures.map((cp) => (
+              <Creature key={cp.id} creature={cp.creature} />
+            ))
+          }
         </svg>
       </div>
       <div
         className={classes.splitter}
         role="switch"
         aria-checked={!collapsed}
-        aria-label="Collapse/Expand"
+        aria-label="Toggle data view"
         tabIndex={0}
         onClick={handleCollapseExpand}
         onKeyPress={handleCollapseExpand}

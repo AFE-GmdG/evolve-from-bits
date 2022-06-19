@@ -25,6 +25,19 @@ export const EvolveLibContextProvider: React.FC = ({
       const getModule = async () => {
         const module = await Module();
         if (!didCancel.current) {
+          debugger;
+          const food = new (module as any).Food(2);
+          console.log(food.value);
+          console.log(food.id);
+          console.log(food.location);
+          const location = {
+            x: food.location.x,
+            y: food.location.y,
+          };
+          console.log(location);
+          const location2 = { ...food.location };
+          console.log(location2);
+
           setCalculateNetwork(() => module._calculateNetwork);
         }
       };

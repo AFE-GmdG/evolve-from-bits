@@ -6,7 +6,7 @@ import { createStyles, makeStyles, Theme, ThemeProvider } from "@material-ui/cor
 
 import PageFooter from "./components/pageFooter";
 
-import { EvolveLibContextProvider } from "./context/evolveLibContext";
+import { EvolveContextProvider } from "./context/evolveContext";
 
 import Pond from "./views/pond";
 import Slash from "./views/slash";
@@ -54,7 +54,7 @@ const App: React.FC = () => {
 
   return (
     <ThemeProvider theme={muiTheme}>
-      <EvolveLibContextProvider>
+      <EvolveContextProvider>
         <BrowserRouter>
           <div className={classes.content}>
             <Switch>
@@ -68,7 +68,7 @@ const App: React.FC = () => {
           </div>
           <PageFooter />
         </BrowserRouter>
-      </EvolveLibContextProvider>
+      </EvolveContextProvider>
     </ThemeProvider>
   );
 };

@@ -113,6 +113,7 @@ const runEmcc = async (sourceFileNames) => {
     `-sEXPORTED_FUNCTIONS=${Object.keys(exportedFunctions).map((key) => `_${key}`).join(",")}`,
     "-sEXPORTED_RUNTIME_METHODS=cwrap",
     "--no-entry",
+    "--bind",
     "-o",
     targetName,
     ...sourceFileNames,
