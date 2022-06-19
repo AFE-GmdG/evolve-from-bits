@@ -4,6 +4,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import Creature, { CreatureProps } from "../components/creature";
 
+import Vec2 from "../math/vec2";
+
 import { isMouseEvent } from "../types/events";
 
 type CreaturePropsWithId = CreatureProps & {
@@ -74,40 +76,40 @@ const Pond: React.FC = () => {
         {
           id: 0,
           creature: {
-            location: {
-              x: Math.random() * 800 + 100,
-              y: Math.random() * 800 + 100,
-            },
+            location: new Vec2(
+              Math.random() * 800 + 100,
+              Math.random() * 800 + 100,
+            ),
             orientation: Math.random() * 360,
             bodyLength: Math.random() * 15 + 5,
           },
         }, {
           id: 1,
           creature: {
-            location: {
-              x: Math.random() * 800 + 100,
-              y: Math.random() * 800 + 100,
-            },
+            location: new Vec2(
+              Math.random() * 800 + 100,
+              Math.random() * 800 + 100,
+            ),
             orientation: Math.random() * 360,
             bodyLength: Math.random() * 15 + 5,
           },
         }, {
           id: 2,
           creature: {
-            location: {
-              x: Math.random() * 800 + 100,
-              y: Math.random() * 800 + 100,
-            },
+            location: new Vec2(
+              Math.random() * 800 + 100,
+              Math.random() * 800 + 100,
+            ),
             orientation: Math.random() * 360,
             bodyLength: Math.random() * 15 + 5,
           },
         }, {
           id: 3,
           creature: {
-            location: {
-              x: Math.random() * 800 + 100,
-              y: Math.random() * 800 + 100,
-            },
+            location: new Vec2(
+              Math.random() * 800 + 100,
+              Math.random() * 800 + 100,
+            ),
             orientation: Math.random() * 360,
             bodyLength: Math.random() * 15 + 5,
           },

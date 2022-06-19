@@ -1,10 +1,10 @@
-import { Point } from "../types/math";
+import Vec2 from "../math/vec2";
 
 export default class Creature {
-  location: Point;
+  location: Vec2;
 
   constructor() {
-    this.location = { x: 0, y: 0 };
+    this.location = Vec2.zero;
   }
 
   renderCreature() {

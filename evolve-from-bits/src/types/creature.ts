@@ -2,6 +2,8 @@
 
 import { Food } from "./food";
 
+import Vec2 from "../math/vec2";
+
 export type Creature = {
   id: number;
   name: string;
@@ -39,6 +41,9 @@ export type Creature = {
   dead: boolean;
   deadAt: number;
   deadFoodValue: number;
+
+  location: Vec2;
+  direction: number;
 };
 
 export const advanceCreature = (
@@ -46,7 +51,7 @@ export const advanceCreature = (
   creature: Creature,
   otherCreatures: Creature[],
   food: Food[],
-): (Creature | null) => {
+): Creature | null => {
   const newCreature = { ...creature };
 
   newCreature.age += 1;
@@ -76,7 +81,7 @@ export const advanceCreature = (
 
   // find the closest food
   const closestFood = food.reduce<{ food: Food | null, distance: number }>((closest, currentFood) => {
-    const distance = distanceBetween(creature, food);
+    const distance = creature.location.distance(currentFood.location);
     if (distance < closest.distance) {
       return {
         food: currentFood,
@@ -89,6 +94,8 @@ export const advanceCreature = (
   if (closestFood.food != null && closestFood.distance < (creature.bodySize + closestFood.food.amount / 10)) {
     // eat the food
     newCreature.hunger = 0;
+
+    // todo: implement eating
   }
 
   newCreature.hp = Math.min(newCreature.hp + 1, newCreature.maxHp);
@@ -102,6 +109,22 @@ export const advanceCreature = (
   if (newCreature.age >= newCreature.breedUntilAge) {
     newCreature.pregnant = true;
     newCreature.pregnancyProgress = 0;
+  }
+
+  // distance to closest other creature
+  const closestOtherCreature = otherCreatures.reduce<{ creature: Creature | null, distance: number }>((closest, currentCreature) => {
+    const distance = creature.location.distance(currentCreature.location);
+    if (distance < closest.distance) {
+      return {
+        creature: currentCreature,
+        distance,
+      };
+    }
+    return closest;
+  }, { creature: null, distance: Infinity });
+
+  if (closestOtherCreature.creature != null && closestOtherCreature.distance < (creature.bodySize + closestOtherCreature.creature.bodySize)) {
+    // todo: implement attack, flee, mate etc.
   }
 
   return newCreature;

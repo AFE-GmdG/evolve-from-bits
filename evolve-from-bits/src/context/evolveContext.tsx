@@ -2,6 +2,7 @@
 
 import React from "react";
 
+import Vec2 from "../math/vec2";
 import { Creature } from "../types/creature";
 import { Food } from "../types/food";
 
@@ -46,10 +47,10 @@ export const EvolveContextProvider: React.FC = ({
     Array.from({ length: 20 }).map<Food>((_, id) => ({
       id,
       amount: Math.random() * 500 + 500,
-      location: {
-        x: Math.random() * 900 + 50,
-        y: Math.random() * 900 + 50,
-      },
+      location: new Vec2(
+        Math.random() * 900 + 50,
+        Math.random() * 900 + 50,
+      ),
     }))
   ));
 
@@ -69,7 +70,7 @@ export const EvolveContextProvider: React.FC = ({
           return newCreatures;
         });
 
-
+        return newFood;
       });
 
       return currentTime + 1;
@@ -123,6 +124,16 @@ export const EvolveContextProvider: React.FC = ({
       pregnant: false,
       pregnancyProgress: 0,
       pregnancyDuration: (Math.random() * 40 + 10) | 0,
+
+      dead: false,
+      deadAt: 0,
+      deadFoodValue: 0,
+
+      location: new Vec2(
+        Math.random() * 900 + 50,
+        Math.random() * 900 + 50,
+      ),
+      direction: Math.random() * Math.PI * 2,
     };
     setCreatures([...creatures, newCreature]);
     setSelectedCreature(newCreature);

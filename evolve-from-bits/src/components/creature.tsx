@@ -4,7 +4,7 @@ import React from "react";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-import { Point } from "types/math";
+import Vec2 from "../math/vec2";
 
 const useStyles = makeStyles((_theme: Theme) => createStyles({
   body: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles((_theme: Theme) => createStyles({
 
 export type CreatureProps = {
   creature: {
-    location: Point;
+    location: Vec2;
     orientation: number;
     bodyLength: number;
   };
