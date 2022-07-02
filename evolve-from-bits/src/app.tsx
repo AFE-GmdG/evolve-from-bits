@@ -1,15 +1,15 @@
 import React from "react";
 import { render } from "react-dom";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { createStyles, makeStyles, Theme, ThemeProvider } from "@material-ui/core/styles";
 
+import DockingContainer from "./components/docking/dockingContainer";
 import PageFooter from "./components/pageFooter";
 
-import { EvolveContextProvider } from "./context/evolveContext";
+import MainDockingWindow from "./windows/mainDockingWindow";
+import UnknownDockingWindow from "./windows/unknownDockingWindow";
 
-import Pond from "./views/pond";
-import Slash from "./views/slash";
+import { EvolveContextProvider } from "./context/evolveContext";
 
 import muiTheme from "./theme";
 
@@ -24,50 +24,52 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     body: {
       display: "flex",
       flexDirection: "column",
+      alignItems: "stretch",
+      justifyContent: "flex-start",
       width: "100%",
       height: "100%",
       overflow: "hidden",
       margin: 0,
     },
     "#app": {
+      position: "relative",
+      flex: "1 0 0px",
       display: "flex",
       flexDirection: "column",
-      flex: "1 0 0px",
+      alignItems: "stretch",
+      justifyContent: "flex-start",
+      overflow: "hidden",
     },
   },
-  content: {
-    position: "relative",
+  dockingContainer: {
     flex: "1 0 0px",
-    backgroundColor: theme.palette.background.default,
-    overflow: "hidden",
-    padding: theme.spacing(1),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "stretch",
-    justifyContent: "space-between",
-    gap: theme.spacing(1),
   },
 }));
 
 const App: React.FC = () => {
   const classes = useStyles();
 
+  const renderDockingWindow = React.useCallback(
+    (windowId: string): React.ReactChild => {
+      switch (windowId) {
+        case "main":
+          return <MainDockingWindow />;
+        default:
+      }
+      return <UnknownDockingWindow expectedWindowId={windowId} />;
+    },
+    [],
+  );
+
   return (
     <ThemeProvider theme={muiTheme}>
       <EvolveContextProvider>
-        <BrowserRouter>
-          <div className={classes.content}>
-            <Switch>
-              <Route path="/pond">
-                <Pond />
-              </Route>
-              <Route path="/">
-                <Slash />
-              </Route>
-            </Switch>
-          </div>
-          <PageFooter />
-        </BrowserRouter>
+        <DockingContainer
+          className={classes.dockingContainer}
+          initialLayoutName="main"
+          renderDockingWindow={renderDockingWindow}
+        />
+        <PageFooter />
       </EvolveContextProvider>
     </ThemeProvider>
   );

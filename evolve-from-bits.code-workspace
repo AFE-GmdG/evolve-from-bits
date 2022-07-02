@@ -4,6 +4,10 @@
       "name": "Evolve From Bits",
       "path": "./evolve-from-bits",
     },
+    {
+      "name": "Evolve Server",
+      "path": "./evolve-server",
+    },
     // {
     //   "name": "Evolve Library",
     //   "path": "./evolve-lib",
@@ -20,8 +24,8 @@
       {
         "type": "chrome",
         "request": "launch",
-        "name": "Launch",
-        "url": "http://localhost:5000",
+        "name": "Launch Frontend",
+        "url": "http://localhost:3000",
         "webRoot": "${workspaceFolder:Evolve From Bits}/dist",
         "preLaunchTask": "build-frontend",
         "sourceMaps": true,
@@ -30,17 +34,40 @@
           "webpack:///*": "*",
         },
       },
-      // {
-      //   "type": "node",
-      //   "request": "launch",
-      //   "name": "Debug Webpack",
-      //   "program": "${workspaceFolder:Evolve From Bits}\\node_modules\\webpack\\bin\\webpack.js",
-      //   "args": [
-      //     "--mode=development",
-      //   ],
-      //   "console": "integratedTerminal",
-      //   "outputCapture": "std",
-      // },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug Webpack",
+        "program": "${workspaceFolder:Evolve From Bits}\\node_modules\\webpack\\bin\\webpack.js",
+        "args": [
+          "--mode=development",
+        ],
+        "console": "integratedTerminal",
+        "outputCapture": "std",
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug Server",
+        "program": "${workspaceFolder:Evolve Server}\\src\\server.ts",
+        "runtimeArgs": [
+          "--preserve-symlinks",
+        ],
+        "cwd": "${workspaceFolder:Evolve Server}",
+        "outFiles": [
+          "${workspaceFolder:Evolve Server}\\dist\\*.js",
+          "!**/node_modules/**"
+        ],
+        "args": [
+        ],
+        "preLaunchTask": "build-server",
+        "sourceMaps": true,
+        "sourceMapPathOverrides": {
+          "webpack:///./*": "${workspaceFolder:Evolve Server}\\src\\*",
+          "webpack:///*": "*",
+        },
+        "console": "internalConsole",
+      },
       // {
       //   "type": "node",
       //   "request": "launch",
@@ -52,6 +79,12 @@
       //   "console": "integratedTerminal",
       //   "outputCapture": "std",
       // },
+    ],
+    "compounds": [
+      {
+        "name": "Launch",
+        "configurations": ["Debug Server", "Launch Frontend"],
+      },
     ],
   },
 
@@ -101,7 +134,45 @@
         },
         "isBackground": true,
         "promptOnClose": false,
-      },
+      }, {
+        "label": "build-server",
+        "type": "process",
+        "command": "yarn",
+        "windows": {
+          "command": "yarn.cmd",
+        },
+        "args": [
+          "--cwd",
+          "${workspaceFolder:Evolve Server}",
+          "builddev",
+        ],
+        "problemMatcher": {
+          "owner": "webpack",
+          "fileLocation": "absolute",
+          "source": "webpack",
+          "pattern": [
+            {
+              "regexp": "^\\[tsl\\] ERROR in (.*)\\((\\d+),(\\d+)\\)$",
+              "file": 1,
+              "line": 2,
+              "column": 3,
+            },
+            {
+              "regexp": "^\\s*(.*)$",
+              "message": 1,
+            },
+          ],
+        },
+        "group": "none",
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+        },
+        "isBackground": false,
+        "promptOnClose": false,
+      }
     ],
   },
 
@@ -129,7 +200,7 @@
     "files.exclude": {
       "**/.vscode": true,
       "**/node_modules": true,
-      "**/dist": true,
+      "**/dist": false,
       "**/bin": true,
       "**/build": true,
       "**/obj": true,

@@ -1,5 +1,26 @@
 import { createTheme } from "@material-ui/core/styles";
 
+declare module "@material-ui/core/styles/createPalette" {
+  interface DockingAction {
+    background: string;
+    backgroundHover: string;
+    borderRadius: number;
+  }
+
+  interface TypeDocking {
+    container: DockingAction;
+    window: DockingAction;
+  }
+
+  interface Palette {
+    docking: TypeDocking;
+  }
+
+  interface PaletteOptions {
+    docking: TypeDocking;
+  }
+}
+
 export default createTheme({
   palette: {
     primary: {
@@ -16,6 +37,18 @@ export default createTheme({
     background: {
       default: "#ffffff",
       paper: "#ececec",
+    },
+    docking: {
+      container: {
+        background: "#363f49",
+        backgroundHover: "#21262c",
+        borderRadius: 0,
+      },
+      window: {
+        background: "#ffffff",
+        backgroundHover: "#ececec",
+        borderRadius: 8,
+      },
     },
     divider: "rgba(0, 0, 0, 0.12)",
   },

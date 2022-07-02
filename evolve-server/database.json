@@ -1,0 +1,24 @@
+{
+    "roles": [
+        {
+            "id": 1,
+            "displayName": "admin"
+        },
+        {
+            "id": 2,
+            "displayName": "viewer"
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "displayName": "Administrator",
+            "email": "admin@bits.de",
+            "passwordHash": "33b3350c01f59023b63d81df1fc5fb9ac0f9bcdb646d3ca0e511c98420cc5a40ad6586c5160beed953243ecc0c697faa256c8dfe5a5a32505accebf18fa307d1",
+            "salt": "ce2f29376ebbcd40fe8f87b374c16e27eef209b33ee0496a527aa424788da496",
+            "roles": [
+                1
+            ]
+        }
+    ]
+}

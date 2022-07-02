@@ -1,85 +1,55 @@
 /**
-  * Webpack 5 configuration file (custom Client-Version)
+  * Webpack 5 configuration file (custom Server-Version)
   * see https://webpack.js.org/configuration/
   * see https://webpack.js.org/configuration/dev-server/
   * ©2019-2022 - Andreas Friedel
   */
 
 const webpack = require("webpack");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const process = require("process");
 
 const cwd = process.cwd();
 
 const config = {
-  name: "Evolve from Bits",
+  name: "Evolve from Bits (Server)",
 
-  target: "web",
+  target: "node",
 
   context: path.resolve(cwd, "src"),
 
   entry: {
-    app: ["./app.tsx"],
+    server: ["./server.ts"],
   },
 
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
-    fallback: {
-      fs: false,
-      path: false,
-    },
+    extensions: [".ts", ".js"],
   },
 
   output: {
     filename: "[name].js",
     path: path.resolve(cwd, "dist"),
-    assetModuleFilename: "assets/[name][ext]",
     publicPath: "",
     globalObject: "self",
   },
 
   module: {
     rules: [{
-      test: /\.tsx?$/,
+      test: /\.ts$/,
       exclude: /node_modules/,
       use: [{
         loader: "ts-loader",
       }],
-    }, {
-      test: /\.(png|jpe?g|gif)$/,
-      exclude: /node_modules/,
-      type: "asset/resource",
     }],
   },
 
   performance: {
     hints: "warning",
-    maxEntrypointSize: 8388608,
+    maxEntrypointSize: 4194304,
     maxAssetSize: 4194304,
   },
 
   plugins: [
-    new CopyWebpackPlugin({
-      patterns: [{
-        from: path.resolve(cwd, "src/assets"),
-        to: path.resolve(cwd, "dist/assets"),
-        globOptions: {
-          ignore: ["**/*.png", "**/*.jpg", "**/*.jpeg", "**/*.gif", "**/*.d.ts"],
-        },
-      }],
-    }),
-    new HtmlWebpackPlugin({
-      baseUrl: "/",
-      filename: "index.html",
-      template: "index.html",
-      inject: "head",
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-      },
-    }),
   ],
 };
 
@@ -119,44 +89,16 @@ module.exports = (_env, argv) => {
           "process.env.VERSION": JSON.stringify(`Debug ${require("./package.json").version}`),
         }),
       ],
-
-      devServer: {
-        allowedHosts: "auto",
-        bonjour: false,
-        client: {
-          logging: "warn",
-          overlay: {
-            errors: true,
-            warnings: false,
-          },
-          progress: false,
-          reconnect: true,
-        },
-        webSocketServer: "ws",
-        compress: true,
-        http2: false,
-        https: false,
-        headers: {
-          "Cross-Origin-Embedder-Policy": "require-corp",
-          "Cross-Origin-Opener-Policy": "same-origin",
-          "Cross-Origin-Resource-Policy": "cross-origin",
-        },
-        historyApiFallback: true,
-        host: "0.0.0.0",
-        hot: false,
-        // liveReload: true,
-        // watchFiles: [path.resolve(cwd, "src")],
-        port: 5000,
-        static: {
-          directory: path.resolve(cwd, "dist"),
-          serveIndex: false,
-        },
-      },
     };
   }
 
   return {
     ...config,
+
+    output: {
+      ...config.output,
+      filename: "[name].min.js",
+    },
 
     devtool: false,
 
