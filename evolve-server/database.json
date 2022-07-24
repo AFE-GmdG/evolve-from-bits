@@ -19,6 +19,16 @@
             "roles": [
                 1
             ]
+        },
+        {
+            "id": 2,
+            "displayName": "Test User",
+            "email": "test1@bits.de",
+            "passwordHash": "b8332a762abb9b3db1b3b78da9f8eb2b35676f13077d1fcfbf67145420c2329fd9bb07848641eb786d5deece621c39da9192e57354148116c7c7eab519bfd2d0",
+            "salt": "39baf9f15402c53c9534075389f0316c2ce8b5458c7838a43b5397d8e387792c",
+            "roles": [
+                2
+            ]
         }
     ]
 }

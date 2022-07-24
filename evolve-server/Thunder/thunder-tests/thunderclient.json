@@ -1,0 +1,81 @@
+[
+  {
+    "_id": "94841c85-167b-4a38-a294-ec875f513033",
+    "colId": "ef0ee1e0-39cf-4a39-8d7d-c3cbbe2171ef",
+    "containerId": "",
+    "name": "Get All User",
+    "url": "http://localhost:3000/api/user",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-07-24T13:56:51.824Z",
+    "modified": "2022-07-24T14:13:41.018Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "5c4faead-6488-404c-a29a-0951c7275f1d",
+    "colId": "ef0ee1e0-39cf-4a39-8d7d-c3cbbe2171ef",
+    "containerId": "",
+    "name": "Get User by ID",
+    "url": "http://localhost:3000/api/user/{id}",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2022-07-24T14:14:13.859Z",
+    "modified": "2022-07-24T14:27:25.404Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      }
+    ],
+    "params": [
+      {
+        "name": "id",
+        "value": "1",
+        "isPath": true
+      }
+    ],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      }
+    ]
+  },
+  {
+    "_id": "cb21fe8b-2c9d-44aa-a71e-02a48e2bd230",
+    "colId": "ef0ee1e0-39cf-4a39-8d7d-c3cbbe2171ef",
+    "containerId": "",
+    "name": "Get User by ID Copy",
+    "url": "http://localhost:3000/api/user",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2022-07-24T14:30:37.965Z",
+    "modified": "2022-07-24T14:33:41.176Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"displayName\": \"Test User\",\n    \"email\": \"test1@bits.de\",\n    \"password\": \"Demo!4711\"\n}\n",
+      "form": []
+    },
+    "tests": []
+  }
+]

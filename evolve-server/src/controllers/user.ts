@@ -69,8 +69,15 @@ class UserController {
       response.status(400).json({message: "Invalid request"});
       return;
     }
-    const newUser = createUser(displayName, email, password);
-    response.json(newUser);
+    try {
+      const newUser = createUser(displayName, email, password);
+      response.json(newUser);
+    } catch (error) {
+      const message = error instanceof Error
+        ? error.message || "Unknown error"
+        : "Unknown error";
+      response.status(400).json({message});
+    }
   }
 
   private update = (_request: express.Request, response: express.Response) => {

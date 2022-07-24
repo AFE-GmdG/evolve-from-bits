@@ -48,7 +48,7 @@
       {
         "type": "node",
         "request": "launch",
-        "name": "Debug Server",
+        "name": "Launch Server",
         "program": "${workspaceFolder:Evolve Server}\\src\\server.ts",
         "runtimeArgs": [
           "--preserve-symlinks",
@@ -83,7 +83,7 @@
     "compounds": [
       {
         "name": "Launch",
-        "configurations": ["Debug Server", "Launch Frontend"],
+        "configurations": ["Launch Server", "Launch Frontend"],
       },
     ],
   },
@@ -200,7 +200,7 @@
     "files.exclude": {
       "**/.vscode": true,
       "**/node_modules": true,
-      "**/dist": false,
+      "**/dist": true,
       "**/bin": true,
       "**/build": true,
       "**/obj": true,
@@ -239,5 +239,11 @@
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
     "javascript.format.placeOpenBraceOnNewLineForFunctions": false,
     "javascript.format.placeOpenBraceOnNewLineForControlBlocks": false,
+
+    "thunder-client.saveToWorkspace": true,
+    "thunder-client.workspaceRelativePath": "../evolve-server/Thunder",
+    "thunder-client.responseLimit": 10,
+    "thunder-client.saveRequestOnSend": false,
+    "thunder-client.showReleaseNotes": false,
   },
 }

@@ -22,6 +22,13 @@ export type User = {
 export const users: Lazy<SecureUser[]> = new Lazy(() => db.getObject<SecureUser[]>("/users"));
 
 export const createUser = (displayName: string, email: string, password: string): User => {
+  if (users.refresh().find(user => user.displayName === displayName)) {
+    throw new Error("Username already taken.");
+  }
+  if (users.value.find(user => user.email === email)) {
+    throw new Error("User already exists.");
+  }
+
   const salt = randomBytes(32);
   const passwordHash = scryptSync(Buffer.from(password, "utf8"), salt, 64, {
     cost: 16384,
@@ -29,7 +36,7 @@ export const createUser = (displayName: string, email: string, password: string)
     parallelization: 1,
   });
 
-  const id = users.refresh().reduce((acc, user) => Math.max(acc, user.id), 0) + 1;
+  const id = users.value.reduce((acc, user) => Math.max(acc, user.id), 0) + 1;
   const viewer = roles.refresh().find((r) => r.displayName === "viewer");
   if (!viewer) {
     throw new Error("viewer role not found");
@@ -44,7 +51,7 @@ export const createUser = (displayName: string, email: string, password: string)
     roles: [viewer.id],
   };
 
-  db.push("/users", [newUser]);
+  db.push("/users", [newUser], false);
 
   return {
     id,
